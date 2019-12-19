@@ -1,0 +1,33 @@
+{
+  "name": "movie-mania",
+  "version": "1.0.0",
+  "description": "movie info website project",
+  "main": "index.js",
+  "scripts": {
+    "dev": "webpack --mode development",
+    "build": "webpack --mode production",
+    "start": "webpack-dev-server --mode development --open"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SakibAzadLion/movie-mania.git"
+  },
+  "author": "Sakib Azad",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SakibAzadLion/movie-mania/issues"
+  },
+  "homepage": "https://github.com/SakibAzadLion/movie-mania#readme",
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.5",
+    "babel-preset-env": "^1.7.0",
+    "html-webpack-plugin": "^3.2.0",
+    "webpack": "^4.41.4",
+    "webpack-cli": "^3.3.10",
+    "webpack-dev-server": "^3.10.1"
+  },
+  "dependencies": {
+    "babel-polyfill": "^6.26.0"
+  }
+}
