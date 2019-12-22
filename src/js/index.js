@@ -1,5 +1,5 @@
 import Trending from './models/Trending';
-import { elements } from './views/base';
+import { elements, renderLoader, clearLoader } from './views/base';
 import * as trendingView from './views/trendingView';
 
 /** Global state of the app
@@ -21,12 +21,15 @@ const controlTrending = async () => {
 
     //3) Prepare UI For Module
     trendingView.clearResult();
+    renderLoader(elements.trendingList);
 
     //4) Search For Movie
     await state.trending.getMovie();
     await state.trending.getGenres();
     state.trending.genreName();
 
+    //Clear Loader
+    clearLoader(elements.trendingList);
     //5) Render Movie To The UI
     trendingView.renderResult(state.trending.result);
 
