@@ -14,7 +14,7 @@ window.s = state;
 const controlTrending = async () => {
     //1) Get Region
     const region = elements.trendingSelect.value.toLowerCase().replace(' ', '_');
-    console.log(region);
+    // console.log(region);
     
     //2) New Trending Object And Add To The State
     state.trending = new Trending(region);
@@ -37,4 +37,18 @@ const controlTrending = async () => {
 
 window.addEventListener('load', controlTrending);
 elements.trendingSelect.addEventListener('change', controlTrending);
+
+elements.trendingPages.addEventListener('click', e => {
+    const btn = e.target.closest('.btn-inline'); //Get Button
+
+    if (btn) {
+        const goToPage = parseInt(btn.dataset.goto); //Get Button Page
+        trendingView.clearResult(); //Clear Result
+        trendingView.renderResult(state.trending.result, goToPage); //Render Result
+    }
+})
+
+
+
+
 

@@ -8,7 +8,7 @@ export default class Trending {
 
     async getMovie () {
         const res = await axios(`https://api.themoviedb.org/3/movie/${this.region}?api_key=${key}&language=en-US&page=1&&append_to_response=genres`);
-        console.log(res.data.results);
+        // console.log(res.data.results);
         this.result = res.data.results;
     }
 

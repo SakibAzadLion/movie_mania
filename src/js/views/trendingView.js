@@ -2,6 +2,35 @@ import { elements } from './base';
 
 export const clearResult = () => {
     elements.trendingList.innerHTML = '';
+    elements.trendingPages.innerHTML = '';
+}
+
+const createButton = (page, type) => `
+    <button class="btn-inline trending__btn--${type === 'prev' ? 'prev' : 'next'}" data-goto="${type === 'prev' ? page - 1 : page + 1}">
+        <i class="material-icons">keyboard_arrow_${type === 'prev' ? 'left' : 'right'}</i>
+    </button>
+`;
+
+const renderButton = (page, numResults, resPerPage) => {
+    const pages = Math.ceil(numResults / resPerPage);
+
+    let button;
+    if (page === 1 && pages > 1) {
+        button = `
+            ${createButton(page, 'next')}
+        `;
+    }else if (page < pages) {
+        button = `
+            ${createButton(page, 'prev')}
+            ${createButton(page, 'next')}
+        `;
+    }else if (page === pages && pages > 1) {
+        button = `
+            ${createButton(page, 'prev')}
+        `;
+    }
+
+    elements.trendingPages.insertAdjacentHTML('afterbegin', button);
 }
 
 const renderMovie = movie => {
@@ -22,8 +51,15 @@ const renderMovie = movie => {
     elements.trendingList.insertAdjacentHTML('beforeend', markup);
 }
 
-export const renderResult = movies => {
-    movies.forEach(renderMovie);
+export const renderResult = (movies, page = 1, resPerPage = 10) => {
+    //Render Result Of Page
+    const start = (page - 1) * resPerPage;
+    const end = page * resPerPage;
+
+    movies.slice(start, end).forEach(renderMovie);
+
+    //Render Pagination Buttons
+    renderButton(page, movies.length, resPerPage);
 }
 
 
