@@ -1,3 +1,4 @@
 export const elements = {
-    trendingRegion: document.querySelector('.trending-option .trending__region')
+    trendingSelect: document.querySelector('.trending__select'),
+    trendingList: document.querySelector('.trending__list'),
 }
