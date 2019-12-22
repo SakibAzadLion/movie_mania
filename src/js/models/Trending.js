@@ -2,19 +2,29 @@ import axios from 'axios';
 import { key } from '../config';
 
 export default class Trending {
-    constructor (region = 'popular') {
-        this.region = region;
+    constructor (trend) {
+        this.trend = trend;
     }
 
     async getMovie () {
-        const res = await axios(`https://api.themoviedb.org/3/movie/${this.region}?api_key=${key}&language=en-US&page=1&&append_to_response=genres`);
-        // console.log(res.data.results);
-        this.result = res.data.results;
+        try {
+            const res = await axios(`https://api.themoviedb.org/3/movie/${this.trend}?api_key=${key}&language=en-US&page=1&&append_to_response=genres`);
+            // console.log(res.data.results);
+            this.result = res.data.results;
+        } catch (error) {
+            console.log(error);
+            alert('Something Wrong In Trending JS (getMovie)');    
+        }
     }
 
     async getGenres () {
-        const genresRes = await axios(`https://api.themoviedb.org/3/genre/movie/list?api_key=${key}&language=en-US`);
-        this.genres = genresRes.data.genres;
+        try {
+            const genresRes = await axios(`https://api.themoviedb.org/3/genre/movie/list?api_key=${key}&language=en-US`);
+            this.genres = genresRes.data.genres;
+        } catch (error) {
+            console.log(error);
+            alert('Something Wrong In Trending JS (getGenres)'); 
+        }
     }
 
     async genreName () {

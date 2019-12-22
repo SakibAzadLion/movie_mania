@@ -1,6 +1,7 @@
 import Trending from './models/Trending';
 import { elements, renderLoader, clearLoader } from './views/base';
 import * as trendingView from './views/trendingView';
+import Movie from './models/Movie';
 
 /** Global state of the app
  * - Trending object
@@ -12,26 +13,35 @@ window.s = state;
  * Trending Controler
  */
 const controlTrending = async () => {
-    //1) Get Region
-    const region = elements.trendingSelect.value.toLowerCase().replace(' ', '_');
+    //1) Get Trend
+    const trend = elements.trendingSelect.value.toLowerCase().replace(' ', '_');
     // console.log(region);
     
-    //2) New Trending Object And Add To The State
-    state.trending = new Trending(region);
+    if (trend) {
 
-    //3) Prepare UI For Module
-    trendingView.clearResult();
-    renderLoader(elements.trendingList);
+        //2) New Trending Object And Add To The State
+        state.trending = new Trending(trend);
 
-    //4) Search For Movie
-    await state.trending.getMovie();
-    await state.trending.getGenres();
-    state.trending.genreName();
+        //3) Prepare UI For Module
+        trendingView.clearResult();
+        renderLoader(elements.trendingList);
 
-    //Clear Loader
-    clearLoader(elements.trendingList);
-    //5) Render Movie To The UI
-    trendingView.renderResult(state.trending.result);
+        try {
+            //4) Search For Movie
+            await state.trending.getMovie();
+            await state.trending.getGenres();
+            state.trending.genreName();
+        
+            //Clear Loader
+            clearLoader(elements.trendingList);
+            //5) Render Movie To The UI
+            trendingView.renderResult(state.trending.result);
+        } catch (error) {
+            console.log(error);
+            alert('Something Wrong In Control Trending');
+        }
+
+    }
 
 }
 
@@ -47,6 +57,37 @@ elements.trendingPages.addEventListener('click', e => {
         trendingView.renderResult(state.trending.result, goToPage); //Render Result
     }
 })
+
+
+/**
+ * Movie Controler
+ */
+const controlMovie = async () => {
+    //1) Get ID
+    const id = window.location.hash.replace('#', '');
+    
+    if (id) {
+        //2) New Trending Object And Add To The State
+        state.movie = new Movie(id);
+
+        //3) Prepare UI For Module
+
+        try {
+            //4) Search For Movie
+            await state.movie.getResults();
+            state.movie.calcRating();
+            console.log(state.movie);
+        
+            //Clear Loader
+
+            //5) Render Movie To The UI
+        } catch (error) {
+        }
+        
+    }
+}
+
+window.addEventListener('hashchange', controlMovie);
 
 
 
