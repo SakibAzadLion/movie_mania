@@ -10,6 +10,18 @@ export const toggleOverlay = type => {
     }
 }
 
+const creatCast = cast => `
+    <li>
+        <div class="cast__fig">
+            <img src="https://image.tmdb.org/t/p/w200${cast.profile_path}" alt="${cast.name}">
+        </div>
+        <div class="cast__data">
+            <h4 class="cast__name">${cast.name}</h4>
+            <p class="cast__role">${cast.character}</p>
+        </div>
+    </li> <!-- Li End -->
+`;
+
 export const renderMovie = movie => {
     const markup = `
         <!-- Movie Info -->
@@ -33,8 +45,8 @@ export const renderMovie = movie => {
                 <div class="movie__data">
                     <h3 class="movie__name">${movie.title}</h3>
                     <div class="movie__det">
-                        <p class="movie__watchtime">${movie.runtime}</p>
-                        <p class="movie__generes">action, comedy, fight</p>
+                        <p class="movie__watchtime">${movie.runtime}min</p>
+                        <p class="movie__generes">${movie.genres.join(', ')}</p>
                     </div>
                     <div class="movie__rating">
                         <i class="material-icons">star</i>
@@ -51,15 +63,7 @@ export const renderMovie = movie => {
             <div class="movie__cast">
                 <h3>CAST</h3>
                 <ul class="movie__cast__list">
-                    <li>
-                        <div class="cast__fig">
-                            <img src="https://picsum.photos/200/300" alt="cast 1">
-                        </div>
-                        <div class="cast__data">
-                            <h4 class="cast__name">Passengers</h4>
-                            <p class="cast__role">Action</p>
-                        </div>
-                    </li> <!-- Li End -->
+                    ${movie.cast.map(el => creatCast(el)).join('')}                    
                 </ul> <!-- Movie Cast List -->
             </div> <!-- Movie Cast -->
         </div> <!-- Movie Info -->
