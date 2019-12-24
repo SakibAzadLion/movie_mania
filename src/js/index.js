@@ -73,6 +73,7 @@ const controlMovie = async () => {
 
         //3) Prepare UI For Module
         movieView.toggleOverlay('add');
+        renderLoader(elements.movie);
 
         try {
             //4) Search For Movie
@@ -80,10 +81,12 @@ const controlMovie = async () => {
             state.movie.calcRating();
         
             //Clear Loader
-
+            clearLoader(elements.movie);
             //5) Render Movie To The UI
             movieView.renderMovie(state.movie);
         } catch (error) {
+            console.log(error);
+            alert('Something Wrong In Control Movie');
         }
         
     }
@@ -93,22 +96,20 @@ const controlMovie = async () => {
  * Close Movie On Click
  */
 const closeMovie = () => {
-    //2) New Trending Object And Add To The State
-    state.movie = new Movie(id);
+    //1) Clear Movie Html
+    movieView.clearMovie();
 
-    //3) Prepare UI For Module
-    movieView.toggleOverlay('add');
+    //2) Remove Overlay Class Add Scroll Bar
+    movieView.toggleOverlay('remove');
 
-    //4) Search For Movie
-        
-    //Clear Loader
-
-    //5) Render Movie To The UI
+    //2) Return To The Home Ure
+    window.location = window.location.origin;
 }
 
 
 elements.movie.addEventListener('click', e => {
-    if(e.target.matches('.btn__close .btn__close *')) {
+    console.log(e.target);
+    if(e.target.matches('.btn__close, .btn__close *')) {
         closeMovie();
     }
 });

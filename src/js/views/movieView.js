@@ -1,12 +1,16 @@
 import { elements } from "./base";
 
+export const clearMovie = () => {
+    elements.movie.innerHTML = '';
+}
+
 export const toggleOverlay = type => {
     if(type === 'add') {
         elements.movie.classList.add('overlay');
-        document.body.style.overflow = 'hidden';
+        document.body.style.overflowY = 'hidden';
     } else if (type === 'remove') {
         elements.movie.classList.remove('overlay');
-        document.body.style.overflow = 'scroll';
+        document.body.style.overflowY = 'scroll';
     }
 }
 
