@@ -10,6 +10,26 @@ export const toggleOverlay = type => {
     }
 }
 
+const ratingStars = rating => {
+    const ratingArr = [];
+
+    let [int, dec] = rating.toString().split('.').map(el => parseFloat(el, 10));
+    
+    for(let i = 0; i < 5; i++) {
+        if (int !== 0) {
+            ratingArr.push('<i class="material-icons">star</i>');
+            int--;
+        }else if (dec === 5) {
+            ratingArr.push('<i class="material-icons">star_half</i>');
+            dec -= 5
+        }else {
+            ratingArr.push('<i class="material-icons">star_border</i>');
+        }
+    }
+
+    return ratingArr.join('');
+}
+
 const creatCast = cast => `
     <li>
         <div class="cast__fig">
@@ -49,11 +69,7 @@ export const renderMovie = movie => {
                         <p class="movie__generes">${movie.genres.join(', ')}</p>
                     </div>
                     <div class="movie__rating">
-                        <i class="material-icons">star</i>
-                        <i class="material-icons">star</i>
-                        <i class="material-icons">star</i>
-                        <i class="material-icons">star</i>
-                        <i class="material-icons">star_border</i>
+                        ${ratingStars(movie.rating)}
                     </div>
                     <div class="movie__desc">
                         <p>${movie.overview}</p>

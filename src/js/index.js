@@ -78,7 +78,6 @@ const controlMovie = async () => {
             //4) Search For Movie
             await state.movie.getResults();
             state.movie.calcRating();
-            console.log(state.movie);
         
             //Clear Loader
 
@@ -89,6 +88,31 @@ const controlMovie = async () => {
         
     }
 }
+
+/**
+ * Close Movie On Click
+ */
+const closeMovie = () => {
+    //2) New Trending Object And Add To The State
+    state.movie = new Movie(id);
+
+    //3) Prepare UI For Module
+    movieView.toggleOverlay('add');
+
+    //4) Search For Movie
+        
+    //Clear Loader
+
+    //5) Render Movie To The UI
+}
+
+
+elements.movie.addEventListener('click', e => {
+    if(e.target.matches('.btn__close .btn__close *')) {
+        closeMovie();
+    }
+});
+
 
 window.addEventListener('hashchange', controlMovie);
 
