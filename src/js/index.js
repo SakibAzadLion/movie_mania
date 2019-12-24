@@ -1,6 +1,7 @@
 import Trending from './models/Trending';
 import { elements, renderLoader, clearLoader } from './views/base';
 import * as trendingView from './views/trendingView';
+import * as movieView from './views/movieView';
 import Movie from './models/Movie';
 
 /** Global state of the app
@@ -71,6 +72,7 @@ const controlMovie = async () => {
         state.movie = new Movie(id);
 
         //3) Prepare UI For Module
+        movieView.toggleOverlay('add');
 
         try {
             //4) Search For Movie
@@ -81,6 +83,7 @@ const controlMovie = async () => {
             //Clear Loader
 
             //5) Render Movie To The UI
+            movieView.renderMovie(state.movie);
         } catch (error) {
         }
         

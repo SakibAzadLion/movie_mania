@@ -2,6 +2,7 @@ export const elements = {
     trendingSelect: document.querySelector('.trending__select'),
     trendingList: document.querySelector('.trending__list'),
     trendingPages: document.querySelector('.trending__pages'),
+    movie: document.querySelector('.movie'),
 }
 
 const elementsString = {
