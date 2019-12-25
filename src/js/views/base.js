@@ -1,8 +1,11 @@
 export const elements = {
     trendingSelect: document.querySelector('.trending__select'),
+    genreSelect: document.querySelector('.genre__select'),
+    sortbySelect: document.querySelector('.sortby__select'),
     trendingList: document.querySelector('.trending__list'),
     trendingPages: document.querySelector('.trending__pages'),
     movie: document.querySelector('.movie'),
+    searchResList: document.querySelector('.search__result__list'),
 }
 
 const elementsString = {

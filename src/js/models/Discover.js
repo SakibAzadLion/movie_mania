@@ -29,6 +29,6 @@ export default class Discover {
 
     filterMovieGenre() {
         const resArr = this.result.filter(movie => movie.genre.name.toLowerCase() === this.genre.toLowerCase());          
-        this.result = resArr;
+        this.filtered = resArr;
     }
 }

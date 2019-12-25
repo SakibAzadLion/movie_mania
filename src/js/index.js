@@ -4,6 +4,7 @@ import Discover from './models/Discover';
 import { elements, renderLoader, clearLoader } from './views/base';
 import * as trendingView from './views/trendingView';
 import * as movieView from './views/movieView';
+import * as discoverView from './views/discoverView';
 
 /** Global state of the app
  * - Trending object
@@ -122,38 +123,34 @@ window.addEventListener('hashchange', controlMovie);
  * Discover Controler
  */
 const controlDiscover = async () => {
-    //1) Get Trend
-    // const trend = elements.trendingSelect.value.toLowerCase().replace(' ', '_');
-    // console.log(region);
-    state.discover = new Discover( 'action', 'popularity');
-    await state.discover.getResult();
-    state.discover.genreName(state.trending.genres);
+    //1) Get Genre And Sortby
+    const genre = elements.genreSelect.value;
+    const sortby = elements.sortbySelect.value;
+    console.log(genre, sortby);
     
-    // if (trend) {
-
-    //     //2) New Trending Object And Add To The State
-    //     state.trending = new Trending(trend);
-
-    //     //3) Prepare UI For Module
-    //     trendingView.clearResult();
-    //     renderLoader(elements.trendingList);
-
-    //     try {
-    //         //4) Search For Movie
-    //         await state.trending.getMovie();
-    //         await state.trending.getGenres();
-    //         state.trending.genreName();
+    if (genre && sortby) {
         
-    //         //Clear Loader
-    //         clearLoader(elements.trendingList);
-    //         //5) Render Movie To The UI
-    //         trendingView.renderResult(state.trending.result);
-    //     } catch (error) {
-    //         console.log(error);
-    //         alert('Something Wrong In Control Trending');
-    //     }
+        //2) New Discover Object And Add To The State
+        state.discover = new Discover(genre, sortby);
 
-    // }
+        //3) Prepare UI For Module
+
+        try {
+            //4) Search For Discover Movie
+            await state.discover.getResult();
+            state.discover.genreName(state.trending.genres);
+
+            //Clear Loader
+
+            //5) Render Movie To The UI
+            discoverView.renderResult(state.discover.result);
+
+        } catch (error) {
+            console.log(error);
+            alert('Something Wrong In Control Discover');
+        }
+
+    }
 
 }
 
