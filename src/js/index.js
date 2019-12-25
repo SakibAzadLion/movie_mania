@@ -125,7 +125,7 @@ const controlDiscover = async () => {
     //1) Get Genre And Sortby
     const genre = elements.genreSelect.value;
     const sortby = elements.sortbySelect.value;
-    console.log(genre);
+    console.log(sortby);
     
     if (genre && sortby) {
         

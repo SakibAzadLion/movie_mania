@@ -14,7 +14,7 @@ export default class Discover {
             const res = await axios(`https://api.themoviedb.org/3/discover/movie?api_key=${key}&language=en-US&sort_by=${this.sortby}.desc&page=${i}`);
             results.push(...res.data.results);
         }
-
+        
         this.result = results;
     }
 
@@ -22,7 +22,9 @@ export default class Discover {
         this.result.forEach(movie => {
             if(movie.genre_ids[0]) {
                 const genre = genres.find(el => el.id === movie.genre_ids[0]);
-                movie.genre = genre;
+                movie.genre = genre;            
+            }else {
+                movie.genre = {id: 0, name:''};
             }
         });
     }
