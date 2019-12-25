@@ -27,7 +27,7 @@ export default class Trending {
         }
     }
 
-    async genreName () {
+    genreName () {
         this.result.forEach(movie => {
             const genre = this.genres.find(el => el.id === movie.genre_ids[0]);
             movie.genre = genre;
