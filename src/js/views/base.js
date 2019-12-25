@@ -6,6 +6,7 @@ export const elements = {
     trendingPages: document.querySelector('.trending__pages'),
     movie: document.querySelector('.movie'),
     searchResList: document.querySelector('.search__result__list'),
+    searchResPages: document.querySelector('.search__result__pages'),
 }
 
 const elementsString = {

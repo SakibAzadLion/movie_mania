@@ -110,7 +110,6 @@ const closeMovie = () => {
 
 
 elements.movie.addEventListener('click', e => {
-    console.log(e.target);
     if(e.target.matches('.btn__close, .btn__close *')) {
         closeMovie();
     }
@@ -126,7 +125,7 @@ const controlDiscover = async () => {
     //1) Get Genre And Sortby
     const genre = elements.genreSelect.value;
     const sortby = elements.sortbySelect.value;
-    console.log(genre, sortby);
+    console.log(genre);
     
     if (genre && sortby) {
         
@@ -134,14 +133,17 @@ const controlDiscover = async () => {
         state.discover = new Discover(genre, sortby);
 
         //3) Prepare UI For Module
+        discoverView.clearMovie();
+        renderLoader(elements.searchResList);
 
         try {
             //4) Search For Discover Movie
             await state.discover.getResult();
             state.discover.genreName(state.trending.genres);
+            state.discover.filterMovieGenre();
 
             //Clear Loader
-
+            clearLoader(elements.searchResList);
             //5) Render Movie To The UI
             discoverView.renderResult(state.discover.result);
 
@@ -155,5 +157,17 @@ const controlDiscover = async () => {
 }
 
 window.addEventListener('load', controlDiscover);
+elements.genreSelect.addEventListener('change', controlDiscover);
+elements.sortbySelect.addEventListener('change', controlDiscover);
+
+elements.searchResPages.addEventListener('click', e => {
+    const btn = e.target.closest('.btn-inline');
+    
+    if (btn) {
+        const goToPage = parseInt(btn.dataset.goto);
+        discoverView.clearMovie();
+        discoverView.renderResult(state.discover.result, goToPage);
+    }
+});
 
 

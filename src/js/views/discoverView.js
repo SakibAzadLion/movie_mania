@@ -1,5 +1,31 @@
 import { elements } from "./base";
 
+export const clearMovie = () => {
+    elements.searchResList.innerHTML = '';
+    elements.searchResPages.innerHTML = '';
+}
+
+const createButton = (page) => `
+    <button class="btn-inline" data-goto="${page}">
+        <span>${page}</span>
+    </button>
+`;
+
+const renderButton = (page, numRes, resPerPage) => {
+    const buttons = [];
+    
+    const pages = Math.ceil(numRes / resPerPage);
+    
+    if(pages > 1) {
+        for(let i = 1; i <= pages; i++) {
+            let button = createButton(i);
+            buttons.push(button);
+        }
+    } 
+
+    elements.searchResPages.insertAdjacentHTML('afterbegin', buttons.join(''));
+}
+
 const renderMovie = movie => {
     const markup = `
         <li>
@@ -23,8 +49,14 @@ const renderMovie = movie => {
     elements.searchResList.insertAdjacentHTML('beforeend', markup);
 }
 
-export const renderResult = (movie) => {
-    movie.forEach(renderMovie);
+export const renderResult = (movie, page = 1, resPerPage = 12) => {
+    //Render Result Of Page
+    const start = (page - 1) * resPerPage;
+    const end = page * resPerPage;
+
+    movie.slice(start, end).forEach(renderMovie);
+
+    renderButton(page, movie.length, resPerPage);
 }
 
 
