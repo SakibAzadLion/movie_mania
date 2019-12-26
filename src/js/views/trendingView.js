@@ -38,7 +38,7 @@ const renderMovie = movie => {
         <li class="bounce">
             <a class="trending__link" href="#${movie.id}">
                 <figure class="trending__fig">
-                    <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="${movie.title}">
+                    <img src="https://image.tmdb.org/t/p/w200${movie.poster_path}" alt="${movie.title}">
                 </figure>
                 <div class="trending__data">
                     <h4 class="trending__name">${movie.title}</h4>

@@ -8,6 +8,7 @@ import * as trendingView from './views/trendingView';
 import * as movieView from './views/movieView';
 import * as discoverView from './views/discoverView';
 import * as searchView from './views/searchView';
+import * as favouriteView from './views/favouriteView';
 
 
 /** Global state of the app
@@ -249,7 +250,7 @@ const controlFavourite = () => {
     console.log(state.favourite.isFavourite(currentId));
     if (!state.favourite.isFavourite(currentId)) {
         //Add Favourite To The State
-        state.favourite.addFavourite(
+        const currentItem = state.favourite.addFavourite(
             currentId,
             state.movie.title,
             state.movie.genres[0],
@@ -257,14 +258,18 @@ const controlFavourite = () => {
         );
 
         //Toggle Favourite Button
-
+        favouriteView.toggleFavouriteBtn(true);
         //Render Favourite To The UI
+        favouriteView.renderFavourite(currentItem);
     } else {
         //Remove Favourite To The State
+        state.favourite.deleteFavourite(currentId);
 
         //Toggle Favourite Button
+        favouriteView.toggleFavouriteBtn(false);
 
-        //Render Favourite To The UI
+        //Remove Favourite To The UI
+        favouriteView.deleteFavourite(currentId);
     }
     //User has not liked the current recipe
 }

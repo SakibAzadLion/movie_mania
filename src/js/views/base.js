@@ -9,6 +9,7 @@ export const elements = {
     searchResPages: document.querySelector('.search__result__pages'),
     search: document.querySelector('.search'),
     searchField: document.querySelector('.search__field'),
+    favouriteList: document.querySelector('.favourite__menu__list'),
 }
 
 const elementsString = {
