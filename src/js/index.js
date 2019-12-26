@@ -193,7 +193,8 @@ const controlSearch = async () => {
         renderLoader(elements.searchResList);
         elements.sortbySelect.setAttribute('disabled', 'disabled');
         elements.genreSelect.setAttribute('disabled', 'disabled');
-        
+        elements.sortbySelect.closest('.select').classList.add('select--disabled');
+        elements.genreSelect.closest('.select').classList.add('select--disabled');
         try {
             //4) Search For Discover Movie
             await state.search.getResult();
@@ -211,6 +212,8 @@ const controlSearch = async () => {
     } else {
         elements.sortbySelect.removeAttribute('disabled');
         elements.genreSelect.removeAttribute('disabled');
+        elements.sortbySelect.closest('.select').classList.remove('select--disabled');
+        elements.genreSelect.closest('.select').classList.remove('select--disabled');
         controlDiscover(); // If No Query Then Go To Discover
     }
     

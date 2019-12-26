@@ -82,9 +82,9 @@ select::-ms-expand {
     display: flex;
     width: 15em;
     height: 30px;
-    background: #5c6664;
     overflow: hidden;
 }
+
 
 
 .select::after {
@@ -104,6 +104,13 @@ select::-ms-expand {
     color: rgb(76, 160, 163);
 }
 
+.select--disabled {
+    color: #578686;
+}
+
+.select--disabled.select:hover::after {
+    color: #578686;
+}
 /* Custom Option Style End */
 
 .movie-section {
