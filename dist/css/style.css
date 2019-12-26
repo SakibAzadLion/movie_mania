@@ -683,8 +683,23 @@ select::-ms-expand {
     vertical-align: bottom;
 }
 
-.movie__data .movie__name{
+.movie__data .movie__name {
     font-size: 150%;
+}
+
+.movie__data .favourite__movie {
+    margin-left: 10px;
+    font-size: 80%;
+    color: #F5C518;
+    padding: 2px;
+    border-radius: 3px;
+    transition: all 0.2;
+    cursor: pointer;
+}
+
+.movie__data .favourite__movie:hover {
+    background-color: #F5C518;
+    color: rgb(239, 241, 206);
 }
 
 .movie__det {

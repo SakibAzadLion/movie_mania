@@ -21,11 +21,4 @@ export default class Search {
             }
         });
     }
-
-    filterMovieGenre() {
-        if (this.genre === 'all') return;
-
-        const resArr = this.result.filter(movie => movie.genre.name.toLowerCase() === this.genre.toLowerCase());          
-        this.result = resArr;
-    }
 }

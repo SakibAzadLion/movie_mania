@@ -2,11 +2,13 @@ import Trending from './models/Trending';
 import Movie from './models/Movie';
 import Discover from './models/Discover';
 import Search from './models/Search';
+import Favourite from './models/favourite';
 import { elements, renderLoader, clearLoader } from './views/base';
 import * as trendingView from './views/trendingView';
 import * as movieView from './views/movieView';
 import * as discoverView from './views/discoverView';
 import * as searchView from './views/searchView';
+
 
 /** Global state of the app
  * - Trending object
@@ -232,6 +234,46 @@ elements.searchResPages.addEventListener('click', e => {
 elements.search.addEventListener('submit', e => {
     e.preventDefault();
     controlSearch();
+});
+
+
+/**
+ *FAVOURITE CONTROLER
+ */
+const controlFavourite = () => {
+    //Create a new Favourite if there is none
+    if (!state.favourite) state.favourite = new Favourite();
+
+    const currentId = state.movie.id;
+    
+    console.log(state.favourite.isFavourite(currentId));
+    if (!state.favourite.isFavourite(currentId)) {
+        //Add Favourite To The State
+        state.favourite.addFavourite(
+            currentId,
+            state.movie.title,
+            state.movie.genres[0],
+            state.movie.poster
+        );
+
+        //Toggle Favourite Button
+
+        //Render Favourite To The UI
+    } else {
+        //Remove Favourite To The State
+
+        //Toggle Favourite Button
+
+        //Render Favourite To The UI
+    }
+    //User has not liked the current recipe
+}
+
+
+elements.movie.addEventListener('click', e => {
+    if (e.target.matches('.favourite__movie')) {
+        controlFavourite();
+    }
 });
 
 

@@ -67,7 +67,7 @@ export const renderMovie = movie => {
                 </div> <!-- Movie Poster-->
                 <!-- Movie Data -->
                 <div class="movie__data">
-                    <h3 class="movie__name">${movie.title}</h3>
+                    <h3 class="movie__name">${movie.title}<i class="material-icons favourite__movie">favorite_border</i></h3>
                     <div class="movie__det">
                         <p class="movie__watchtime">${movie.runtime}min</p>
                         <p class="movie__generes">${movie.genres.join(', ')}</p>
