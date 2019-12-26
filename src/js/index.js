@@ -12,6 +12,8 @@ import * as searchView from './views/searchView';
  * - Trending object
  */
 const state = {};
+
+state.isSearched = false;
 window.s = state;
 
 /**
@@ -127,6 +129,7 @@ const controlDiscover = async () => {
     //1) Get Genre And Sortby
     const genre = elements.genreSelect.value;
     const sortby = elements.sortbySelect.value;
+    state.isSearched = false;
     
     if (genre && sortby) {
         
@@ -147,19 +150,20 @@ const controlDiscover = async () => {
             clearLoader(elements.searchResList);
             //5) Render Movie To The UI
             discoverView.renderResult(state.discover.result);
-
+            
         } catch (error) {
             console.log(error);
             alert('Something Wrong In Control Discover');
         }
-
+        
     }
-
+    
 }
 
 window.addEventListener('load', controlDiscover);
 elements.genreSelect.addEventListener('change', controlDiscover);
 elements.sortbySelect.addEventListener('change', controlDiscover);
+
 
 elements.searchResPages.addEventListener('click', e => {
     const btn = e.target.closest('.btn-inline');
@@ -178,20 +182,23 @@ elements.searchResPages.addEventListener('click', e => {
 const controlSearch = async () => {
     //1) Get Genre And Sortby
     const query = elements.searchField.value;
+    state.isSearched = true;
     
     if (query) {        
         //2) New Search Object And Add To The State
         state.search = new Search(query);
-
+        
         //3) Prepare UI For Module
         searchView.clearMovie();
         renderLoader(elements.searchResList);
-
+        elements.sortbySelect.setAttribute('disabled', 'disabled');
+        elements.genreSelect.setAttribute('disabled', 'disabled');
+        
         try {
             //4) Search For Discover Movie
             await state.search.getResult();
             state.search.genreName(state.trending.genres);
-
+            
             //Clear Loader
             clearLoader(elements.searchResList);
             //5) Render Movie To The UI
@@ -202,9 +209,11 @@ const controlSearch = async () => {
         }
 
     } else {
+        elements.sortbySelect.removeAttribute('disabled');
+        elements.genreSelect.removeAttribute('disabled');
         controlDiscover(); // If No Query Then Go To Discover
     }
-
+    
 }
 
 elements.searchResPages.addEventListener('click', e => {
@@ -221,3 +230,19 @@ elements.search.addEventListener('submit', e => {
     e.preventDefault();
     controlSearch();
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
