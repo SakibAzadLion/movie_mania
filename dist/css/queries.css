@@ -115,7 +115,8 @@
         display: block;
     }
 
-    .btn-inline {
+    .btn-inline,
+    .btn-inline-search {
         width: 30px;
         height: 30px;
         font-size: 70%;

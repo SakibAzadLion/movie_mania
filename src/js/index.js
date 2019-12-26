@@ -1,10 +1,12 @@
 import Trending from './models/Trending';
 import Movie from './models/Movie';
 import Discover from './models/Discover';
+import Search from './models/Search';
 import { elements, renderLoader, clearLoader } from './views/base';
 import * as trendingView from './views/trendingView';
 import * as movieView from './views/movieView';
 import * as discoverView from './views/discoverView';
+import * as searchView from './views/searchView';
 
 /** Global state of the app
  * - Trending object
@@ -105,7 +107,7 @@ const closeMovie = () => {
     movieView.toggleOverlay('remove');
 
     //2) Return To The Home Ure
-    window.location = window.location.origin;
+    window.location.hash = '';
 }
 
 
@@ -125,7 +127,6 @@ const controlDiscover = async () => {
     //1) Get Genre And Sortby
     const genre = elements.genreSelect.value;
     const sortby = elements.sortbySelect.value;
-    console.log(sortby);
     
     if (genre && sortby) {
         
@@ -162,7 +163,7 @@ elements.sortbySelect.addEventListener('change', controlDiscover);
 
 elements.searchResPages.addEventListener('click', e => {
     const btn = e.target.closest('.btn-inline');
-    
+    console.log(btn);
     if (btn) {
         const goToPage = parseInt(btn.dataset.goto);
         discoverView.clearMovie();
@@ -171,3 +172,52 @@ elements.searchResPages.addEventListener('click', e => {
 });
 
 
+/**
+ * Search Controler
+ */
+const controlSearch = async () => {
+    //1) Get Genre And Sortby
+    const query = elements.searchField.value;
+    
+    if (query) {        
+        //2) New Search Object And Add To The State
+        state.search = new Search(query);
+
+        //3) Prepare UI For Module
+        searchView.clearMovie();
+        renderLoader(elements.searchResList);
+
+        try {
+            //4) Search For Discover Movie
+            await state.search.getResult();
+            state.search.genreName(state.trending.genres);
+
+            //Clear Loader
+            clearLoader(elements.searchResList);
+            //5) Render Movie To The UI
+            searchView.renderResult(state.search.result);
+        } catch (error) {
+            console.log(error);
+            alert('Something Wrong In Control Search');
+        }
+
+    } else {
+        controlDiscover(); // If No Query Then Go To Discover
+    }
+
+}
+
+elements.searchResPages.addEventListener('click', e => {
+    const btnSearch = e.target.closest('.btn-inline-search');
+    
+    if (btnSearch) {
+        const goToPage = parseInt(btnSearch.dataset.gotopage);
+        searchView.clearMovie();
+        searchView.renderResult(state.search.result, goToPage);
+    }
+});
+
+elements.search.addEventListener('submit', e => {
+    e.preventDefault();
+    controlSearch();
+});

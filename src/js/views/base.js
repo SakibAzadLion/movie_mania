@@ -7,10 +7,12 @@ export const elements = {
     movie: document.querySelector('.movie'),
     searchResList: document.querySelector('.search__result__list'),
     searchResPages: document.querySelector('.search__result__pages'),
+    search: document.querySelector('.search'),
+    searchField: document.querySelector('.search__field'),
 }
 
 const elementsString = {
-    loader: 'loader'
+    loader: 'loader',
 }
 
 export const renderLoader = parent => {
