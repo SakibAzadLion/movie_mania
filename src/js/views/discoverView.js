@@ -5,8 +5,8 @@ export const clearMovie = () => {
     elements.searchResPages.innerHTML = '';
 }
 
-const createButton = (page) => `
-    <button class="btn-inline" data-goto="${page}">
+const createButton = (pageActive, page) => `
+    <button class="btn-inline ${pageActive === page ? 'btn--active' : ''}" data-goto="${page}">
         <span>${page}</span>
     </button>
 `;
@@ -16,9 +16,9 @@ const renderButton = (page, numRes, resPerPage) => {
     
     const pages = Math.ceil(numRes / resPerPage);
     
-    if(pages > 1) {
+    if (pages > 1) {
         for(let i = 1; i <= pages; i++) {
-            let button = createButton(i);
+            let button = createButton(page, i);
             buttons.push(button);
         }
     } 
@@ -28,7 +28,7 @@ const renderButton = (page, numRes, resPerPage) => {
 
 const renderMovie = movie => {
     const markup = `
-        <li>
+        <li class="wow fadeIn">
             <a class="search__result__link" href="#${movie.id}">
                 <div class="search__result__fig">
                     <img src="https://image.tmdb.org/t/p/w500${movie.poster_path ? movie.poster_path : movie.backdrop_path}" alt="${movie.title}">

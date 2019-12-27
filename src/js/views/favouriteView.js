@@ -6,6 +6,20 @@ export const toggleFavouriteBtn = isLiked => {
     document.querySelector('.favourite__movie').textContent = iconString;
 }
 
+export const toggleVisibility = numFavourite => {
+    if (numFavourite > 0) {
+        document.querySelector('.favourite__field').style.visibility = 'visible';
+        document.querySelector('.favourite__field').classList.add('wow');
+        document.querySelector('.favourite__field').classList.add('fadeIn');
+        
+    } else {
+        document.querySelector('.favourite__field').style.visibility = 'hidden';
+        document.querySelector('.favourite__field').classList.remove('wow');
+        document.querySelector('.favourite__field').classList.remove('fadeIn');
+
+    }
+}
+
 export const renderFavourite = favourite => {
     const markup = `
         <li>
@@ -17,9 +31,6 @@ export const renderFavourite = favourite => {
                     <h4 class="favourite__name">${favourite.title}</h4>
                     <p class="favourite__author">${favourite.genre}</p>
                 </div>
-                <div class="favourite__close">
-                <i class="material-icons">close</i>
-                </div>
             </a>
         </li>    
     `;
@@ -29,6 +40,5 @@ export const renderFavourite = favourite => {
 
 export const deleteFavourite = id => {
     const favorite = document.querySelector(`.favourite__link[href="#${id}"]`).parentElement;
-    console.log(favorite);
     favorite.parentElement.removeChild(favorite);
 }

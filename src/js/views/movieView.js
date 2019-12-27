@@ -46,13 +46,13 @@ const creatCast = cast => `
     </li> <!-- Li End -->
 `;
 
-export const renderMovie = movie => {
+export const renderMovie = (movie, isFavourite) => {
     const markup = `
         <!-- Movie Info -->
         <button class="btn__close">
             <i class="material-icons">close</i>
         </button>
-        <div class="movie__info movie__info__overlay">
+        <div class="movie__info movie__info__overlay fadeIn">
             <!-- Close Button -->
             <!-- Movie Full Content -->
             <div class="movie__content">
@@ -67,7 +67,7 @@ export const renderMovie = movie => {
                 </div> <!-- Movie Poster-->
                 <!-- Movie Data -->
                 <div class="movie__data">
-                    <h3 class="movie__name">${movie.title}<i class="material-icons favourite__movie">favorite_border</i></h3>
+                    <h3 class="movie__name">${movie.title}<i class="material-icons favourite__movie">favorite${isFavourite ? '' : '_border'}</i></h3>
                     <div class="movie__det">
                         <p class="movie__watchtime">${movie.runtime}min</p>
                         <p class="movie__generes">${movie.genres.join(', ')}</p>

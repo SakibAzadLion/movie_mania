@@ -63,6 +63,9 @@ elements.trendingPages.addEventListener('click', e => {
 
     if (btn) {
         const goToPage = parseInt(btn.dataset.goto); //Get Button Page
+
+        if (!goToPage) return;
+
         trendingView.clearResult(); //Clear Result
         trendingView.renderResult(state.trending.result, goToPage); //Render Result
     }
@@ -92,7 +95,7 @@ const controlMovie = async () => {
             //Clear Loader
             clearLoader(elements.movie);
             //5) Render Movie To The UI
-            movieView.renderMovie(state.movie);
+            movieView.renderMovie(state.movie, state.favourite.isFavourite(id));
         } catch (error) {
             console.log(error);
             alert('Something Wrong In Control Movie');
@@ -170,7 +173,6 @@ elements.sortbySelect.addEventListener('change', controlDiscover);
 
 elements.searchResPages.addEventListener('click', e => {
     const btn = e.target.closest('.btn-inline');
-    console.log(btn);
     if (btn) {
         const goToPage = parseInt(btn.dataset.goto);
         discoverView.clearMovie();
@@ -237,13 +239,15 @@ elements.search.addEventListener('submit', e => {
     controlSearch();
 });
 
-
+state.favourite = new Favourite();
+favouriteView.toggleVisibility(state.favourite.numFavourite());
 /**
  *FAVOURITE CONTROLER
  */
 const controlFavourite = () => {
     //Create a new Favourite if there is none
     if (!state.favourite) state.favourite = new Favourite();
+    favouriteView.toggleVisibility(state.favourite.numFavourite);
 
     const currentId = state.movie.id;
     
@@ -272,6 +276,7 @@ const controlFavourite = () => {
         favouriteView.deleteFavourite(currentId);
     }
     //User has not liked the current recipe
+    favouriteView.toggleVisibility(state.favourite.numFavourite());
 }
 
 
@@ -280,8 +285,6 @@ elements.movie.addEventListener('click', e => {
         controlFavourite();
     }
 });
-
-
 
 
 

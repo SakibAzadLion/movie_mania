@@ -5,8 +5,14 @@ export const clearResult = () => {
     elements.trendingPages.innerHTML = '';
 }
 
-const createButton = (page, type) => `
-    <button class="btn-inline trending__btn--${type === 'prev' ? 'prev' : 'next'}" data-goto="${type === 'prev' ? page - 1 : page + 1}">
+const createButton = (page, type, isDisabled) => `
+    <button class="btn-inline" data-goto="${type === 'prev' ? page - 1 : page + 1}">
+        <i class="material-icons">keyboard_arrow_${type === 'prev' ? 'left' : 'right'}</i>
+    </button>
+`;
+
+const createButtonDisabled = (type, isDisabled) => `
+    <button class="btn-inline  ${isDisabled ? 'btn--disabled' : ''}" >
         <i class="material-icons">keyboard_arrow_${type === 'prev' ? 'left' : 'right'}</i>
     </button>
 `;
@@ -17,16 +23,18 @@ const renderButton = (page, numResults, resPerPage) => {
     let button;
     if (page === 1 && pages > 1) {
         button = `
-            ${createButton(page, 'next')}
+            ${createButtonDisabled('prev', true)}
+            ${createButton(page, 'next', false)}
         `;
     }else if (page < pages) {
         button = `
-            ${createButton(page, 'prev')}
-            ${createButton(page, 'next')}
+            ${createButton(page, 'prev', false)}
+            ${createButton(page, 'prev', false)}
         `;
     }else if (page === pages && pages > 1) {
         button = `
-            ${createButton(page, 'prev')}
+            ${createButton(page, 'prev', false)}
+            ${createButtonDisabled('next', true)}
         `;
     }
 
@@ -35,7 +43,7 @@ const renderButton = (page, numResults, resPerPage) => {
 
 const renderMovie = movie => {
     const markup = `
-        <li class="bounce">
+        <li class="wow fadeIn">
             <a class="trending__link" href="#${movie.id}">
                 <figure class="trending__fig">
                     <img src="https://image.tmdb.org/t/p/w200${movie.poster_path}" alt="${movie.title}">

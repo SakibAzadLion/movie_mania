@@ -16,10 +16,14 @@ export default class Favourite {
     deleteFavourite (id) {
         const index = this.items.findIndex(el => el.id === id);
 
-        this.items.slice(index, 1);
+        this.items.splice(index, 1);
     }
 
     isFavourite (id) {
         return this.items.findIndex(el => el.id === id) !== -1;
+    }
+
+    numFavourite () {
+        return this.items.length;
     }
 }
