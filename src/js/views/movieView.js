@@ -16,18 +16,21 @@ export const toggleOverlay = type => {
 
 const ratingStars = rating => {
     const ratingArr = [];
-
+    console.log(rating);
     let [int, dec] = rating.toString().split('.').map(el => parseFloat(el, 10));
     
     for(let i = 0; i < 5; i++) {
-        if (int !== 0) {
+        if (int > 0) {
             ratingArr.push('<i class="material-icons">star</i>');
             int--;
-        }else if (dec === 5) {
+            console.log(int);
+        }else if (dec >= 5 && dec <= 8) {
             ratingArr.push('<i class="material-icons">star_half</i>');
-            dec -= 5
+            dec -= 5;
+            console.log(dec);
         }else {
             ratingArr.push('<i class="material-icons">star_border</i>');
+            console.log(i);
         }
     }
 
@@ -73,7 +76,7 @@ export const renderMovie = (movie, isFavourite) => {
                         <p class="movie__generes">${movie.genres.join(', ')}</p>
                     </div>
                     <div class="movie__rating">
-                        ${ratingStars(movie.rating)}
+                        ${ratingStars(movie.rating.toFixed(1))}
                     </div>
                     <div class="movie__desc">
                         <p>${movie.overview}</p>
