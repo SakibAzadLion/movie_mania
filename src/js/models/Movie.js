@@ -14,7 +14,7 @@ export default class Movie {
         this.runtime = res.data.runtime;
         this.overview = res.data.overview;
         this.poster = res.data.poster_path;
-        this.trailer = res.data.videos.results[0].key;
+        this.trailer = res.data.videos.results.length > 0 ? res.data.videos.results[0].key : '404';
         this.cast = res.data.credits.cast.slice(0, 9);
         this.genres = res.data.genres.map(el => el.name);
     }

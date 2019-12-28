@@ -137,17 +137,17 @@ select::-ms-expand {
     position: relative;
 }
 
-.logo-box,
+.logo__box,
 .logo-box-phone {
     padding: 25px 35px;
     text-align: center;
 }
 
-.logo-box {
+.logo__box {
     height: 94px;
 }
 
-.logo-box h2,
+.logo__box h2,
 .logo-box-phone h2 {
     color:#F5C518;
     font-weight: 700;
@@ -155,6 +155,7 @@ select::-ms-expand {
     padding: 5px 15px;
     border-radius: 6px;
     border: 4px solid #F5C518;
+    cursor: pointer;
 }
 
 .logo-box-phone {
@@ -444,7 +445,7 @@ select::-ms-expand {
 
 .search__result__list {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     flex-wrap: wrap;
     list-style: none;
 }

@@ -9,6 +9,7 @@ export default class Favourite {
         }
 
         this.items.push(item);
+        this.persistData();
         
         return item;
     }
@@ -17,6 +18,8 @@ export default class Favourite {
         const index = this.items.findIndex(el => el.id === id);
 
         this.items.splice(index, 1);
+
+        this.persistData();
     }
 
     isFavourite (id) {
@@ -25,5 +28,15 @@ export default class Favourite {
 
     numFavourite () {
         return this.items.length;
+    }
+
+    persistData () {
+        localStorage.setItem('favourite', JSON.stringify(this.items));
+    }
+
+    readStorage () {
+        const storage = JSON.parse(localStorage.getItem('favourite'));
+
+        this.items = storage;
     }
 }

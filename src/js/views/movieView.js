@@ -37,7 +37,7 @@ const ratingStars = rating => {
 const creatCast = cast => `
     <li>
         <div class="cast__fig">
-            <img src="https://image.tmdb.org/t/p/w200${cast.profile_path}" alt="${cast.name}">
+            <img src="${cast.profile_path ? `https://image.tmdb.org/t/p/w200${cast.profile_path}` : './img/unknown.jpg'}" alt="${cast.name}">
         </div>
         <div class="cast__data">
             <h4 class="cast__name">${cast.name}</h4>
@@ -59,7 +59,7 @@ export const renderMovie = (movie, isFavourite) => {
                 <!-- Movie Poster -->
                 <div class="movie__poster">
                     <div class="movie__fig">
-                        <img src="https://image.tmdb.org/t/p/w500${movie.poster}">
+                        <img src="${movie.poster ? `https://image.tmdb.org/t/p/w500${movie.poster}` : './img/unknown.jpg'}">
                     </div>
                     <div class="movie__trailer">
                         <a href="https://youtu.be/${movie.trailer}" class="btn__trailer" target="_blank">Watch Trailer<i class="material-icons">arrow_right</i></a>

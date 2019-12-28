@@ -31,7 +31,7 @@ const renderMovie = movie => {
         <li class="wow fadeIn">
             <a class="search__result__link" href="#${movie.id}">
                 <div class="search__result__fig">
-                    <img src="https://image.tmdb.org/t/p/w500${movie.poster_path ? movie.poster_path : movie.backdrop_path}" alt="${movie.title}">
+                    <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="${movie.title}">
 
                     <div class="search__result__rating">
                         <i class="material-icons">star</i>

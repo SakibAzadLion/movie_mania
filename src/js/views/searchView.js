@@ -5,8 +5,8 @@ export const clearMovie = () => {
     elements.searchResPages.innerHTML = '';
 }
 
-const createButton = (page) => `
-    <button class="btn-inline-search" data-gotopage="${page}">
+const createButton = (pageActive, page) => `
+    <button class="btn-inline-search ${pageActive === page ? 'btn--active' : ''}" data-gotopage="${page}">
         <span>${page}</span>
     </button>
 `;
@@ -18,7 +18,7 @@ const renderButton = (page, numRes, resPerPage) => {
     
     if(pages > 1) {
         for(let i = 1; i <= pages; i++) {
-            let button = createButton(i);
+            let button = createButton(page, i);
             buttons.push(button);
         }
     } 
@@ -31,7 +31,7 @@ const renderMovie = movie => {
         <li>
             <a class="search__result__link" href="#${movie.id}">
                 <div class="search__result__fig">
-                    <img src="https://image.tmdb.org/t/p/w500${movie.poster_path ? movie.poster_path : movie.backdrop_path}" alt="${movie.title}">
+                    <img src="${movie.poster_path ? `https://image.tmdb.org/t/p/w500${movie.poster_path}` : './img/unknown.jpg'}" alt="${movie.title}">
 
                     <div class="search__result__rating">
                         <i class="material-icons">star</i>

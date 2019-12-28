@@ -169,6 +169,7 @@ const controlDiscover = async () => {
 window.addEventListener('load', controlDiscover);
 elements.genreSelect.addEventListener('change', controlDiscover);
 elements.sortbySelect.addEventListener('change', controlDiscover);
+elements.logoBox.addEventListener('click', controlDiscover);
 
 
 elements.searchResPages.addEventListener('click', e => {
@@ -239,8 +240,7 @@ elements.search.addEventListener('submit', e => {
     controlSearch();
 });
 
-state.favourite = new Favourite();
-favouriteView.toggleVisibility(state.favourite.numFavourite());
+
 /**
  *FAVOURITE CONTROLER
  */
@@ -285,6 +285,22 @@ elements.movie.addEventListener('click', e => {
         controlFavourite();
     }
 });
+
+
+//Restore favourite movie on page load
+window.addEventListener('load', e => {
+    state.favourite = new Favourite();
+    
+    //Reading data from local storage
+    state.favourite.readStorage();
+    
+    //Toggle Menu
+    favouriteView.toggleVisibility(state.favourite.numFavourite());
+
+    //Redering favourite movie
+    state.favourite.items.forEach(favourite => favouriteView.renderFavourite(favourite));
+})
+
 
 
 
