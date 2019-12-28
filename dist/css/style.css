@@ -368,7 +368,7 @@ select::-ms-expand {
     color: #F5C518;
     font-size: 250%;
     cursor: pointer;
-    transition: all 0.2s;
+    transition: all 0.5s;
 }
 
 
@@ -388,7 +388,9 @@ select::-ms-expand {
     z-index: 999999;
     visibility: hidden;
     opacity: 0;
-    transition: all 0.5s;
+    transition: all .5s .2s;
+    -webkit-animation-delay: -2s;
+    animation-delay: -2s;
 }
 
 .favourite__menu__list {
@@ -402,12 +404,7 @@ select::-ms-expand {
 .favourite__menu:hover,
 .favourite__field:hover + .favourite__menu {
     visibility: visible;
-    -webkit-animation-name: fadeInUp;
-    animation-name: fadeInUp;
-    animation-duration: 1s;
-    -webkit-animation-duration: 1s;
-    -webkit-animation-fill-mode: both;
-    animation-fill-mode: both;
+    opacity: 1;
 }
 
 .movie-filters {
@@ -786,6 +783,7 @@ select::-ms-expand {
     display: flex;  
     align-items: center;
     margin-bottom: 20px;  
+    padding-right: 7px;
 }
 
 .cast__fig {
@@ -863,44 +861,6 @@ select::-ms-expand {
   /* Loading Style End */
 
   /* Anitation */
-  @-webkit-keyframes fadeInUp {
-    from {
-      opacity: 0;
-      -webkit-transform: translate3d(0, 10%, 0);
-      transform: translate3d(0, 10%, 0);
-    }
-  
-    to {
-      opacity: 1;
-      -webkit-transform: translate3d(0, 0, 0);
-      transform: translate3d(0, 0, 0);
-    }
-  }
-  
-  @keyframes fadeInUp {
-    from {
-      opacity: 0;
-      -webkit-transform: translate3d(0, 10%, 0);
-      transform: translate3d(0, 10%, 0);
-    }
-  
-    to {
-      opacity: 1;
-      -webkit-transform: translate3d(0, 0, 0);
-      transform: translate3d(0, 0, 0);
-    }
-  }
-
-  .fadeInUp {
-    opacity: 0;
-    -webkit-animation-name: fadeInUp;
-    animation-name: fadeInUp;
-    animation-duration: 2s;
-    -webkit-animation-duration: 2s;
-    -webkit-animation-fill-mode: both;
-    animation-fill-mode: both;
-  }
-
   @-webkit-keyframes fadeIn {
     from {
       opacity: 0;
@@ -924,8 +884,8 @@ select::-ms-expand {
   .fadeIn {
     -webkit-animation-name: fadeIn;
     animation-name: fadeIn;
-    animation-duration: 2s;
-    -webkit-animation-duration: 2s;
+    animation-duration: 1s;
+    -webkit-animation-duration: 1s;
     -webkit-animation-fill-mode: both;
     animation-fill-mode: both;
   }
