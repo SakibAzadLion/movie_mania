@@ -5,6 +5,14 @@ export const clearMovie = () => {
     elements.searchResPages.innerHTML = '';
 }
 
+export const nothingFound = () => {
+    const markup = `
+        <p>No Movies Found</p>
+    `;
+
+    elements.searchResList.insertAdjacentHTML('beforeend', markup);
+};
+
 const createButton = (pageActive, page) => `
     <button class="btn-inline ${pageActive === page ? 'btn--active' : ''}" data-goto="${page}">
         <span>${page}</span>
@@ -50,13 +58,17 @@ const renderMovie = movie => {
 }
 
 export const renderResult = (movie, page = 1, resPerPage = 12) => {
-    //Render Result Of Page
-    const start = (page - 1) * resPerPage;
-    const end = page * resPerPage;
+    if (movie.length > 0) {
+        //Render Result Of Page
+        const start = (page - 1) * resPerPage;
+        const end = page * resPerPage;
 
-    movie.slice(start, end).forEach(renderMovie);
+        movie.slice(start, end).forEach(renderMovie);
 
-    renderButton(page, movie.length, resPerPage);
+        renderButton(page, movie.length, resPerPage);
+    } else {
+        nothingFound();
+    }
 }
 
 

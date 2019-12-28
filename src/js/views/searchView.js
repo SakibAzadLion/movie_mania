@@ -1,4 +1,5 @@
 import { elements } from "./base";
+import { nothingFound } from "./discoverView";
 
 export const clearMovie = () => {
     elements.searchResList.innerHTML = '';
@@ -50,11 +51,15 @@ const renderMovie = movie => {
 }
 
 export const renderResult = (movie, page = 1, resPerPage = 12) => {
-    //Render Result Of Page
-    const start = (page - 1) * resPerPage;
-    const end = page * resPerPage;
+    if (movie.length > 0) {
+        //Render Result Of Page
+        const start = (page - 1) * resPerPage;
+        const end = page * resPerPage;
 
-    movie.slice(start, end).forEach(renderMovie);
+        movie.slice(start, end).forEach(renderMovie);
 
-    renderButton(page, movie.length, resPerPage);
+        renderButton(page, movie.length, resPerPage);
+    } else {
+        nothingFound();
+    }
 }

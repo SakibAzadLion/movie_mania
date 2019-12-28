@@ -127,6 +127,7 @@ elements.movie.addEventListener('click', e => {
 });
 
 window.addEventListener('hashchange', controlMovie);
+window.addEventListener('load', controlMovie);
 
 
 /**
