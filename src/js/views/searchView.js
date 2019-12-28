@@ -28,7 +28,7 @@ const renderButton = (page, numRes, resPerPage) => {
 
 const renderMovie = movie => {
     const markup = `
-        <li>
+        <li class="wow fadeIn">
             <a class="search__result__link" href="#${movie.id}">
                 <div class="search__result__fig">
                     <img src="${movie.poster_path ? `https://image.tmdb.org/t/p/w500${movie.poster_path}` : './img/unknown.jpg'}" alt="${movie.title}">

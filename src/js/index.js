@@ -67,6 +67,7 @@ elements.trendingPages.addEventListener('click', e => {
         if (!goToPage) return;
 
         trendingView.clearResult(); //Clear Result
+        window.scrollTo(0, 0); //Scroll Top Page Top
         trendingView.renderResult(state.trending.result, goToPage); //Render Result
     }
 })
@@ -177,6 +178,7 @@ elements.searchResPages.addEventListener('click', e => {
     if (btn) {
         const goToPage = parseInt(btn.dataset.goto);
         discoverView.clearMovie();
+        window.scrollTo(0, 0); //Scroll Top Page Top
         discoverView.renderResult(state.discover.result, goToPage);
     }
 });
@@ -231,6 +233,7 @@ elements.searchResPages.addEventListener('click', e => {
     if (btnSearch) {
         const goToPage = parseInt(btnSearch.dataset.gotopage);
         searchView.clearMovie();
+        window.scrollTo(0, 0); //Scroll Top Page Top
         searchView.renderResult(state.search.result, goToPage);
     }
 });
