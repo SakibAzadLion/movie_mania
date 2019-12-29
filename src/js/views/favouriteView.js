@@ -1,8 +1,10 @@
 import { elements } from './base';
 
-export const toggleFavouriteBtn = isLiked => {
-    const iconString = isLiked ? 'favorite' : 'favorite_border';
+export const toggleFavouriteBtn = isFavourite => {
+    //1) Favourite icon name
+    const iconString = isFavourite ? 'favorite' : 'favorite_border';
 
+    //2) Change icon on UI based of favourite or not
     document.querySelector('.favourite__movie').textContent = iconString;
 }
 
@@ -21,6 +23,7 @@ export const toggleVisibility = numFavourite => {
 }
 
 export const renderFavourite = favourite => {
+    //1) Favourite HTML
     const markup = `
         <li>
             <a class="favourite__link" href="#${favourite.id}">
@@ -35,10 +38,14 @@ export const renderFavourite = favourite => {
         </li>    
     `;
 
+    //2) Insert favourite html to the UI
     elements.favouriteList.insertAdjacentHTML('beforeend', markup);
 }
 
 export const deleteFavourite = id => {
+    //1) Select delete item
     const favorite = document.querySelector(`.favourite__link[href="#${id}"]`).parentElement;
+    
+    //2) Remove item from UI
     favorite.parentElement.removeChild(favorite);
 }

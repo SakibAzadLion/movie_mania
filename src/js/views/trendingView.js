@@ -1,47 +1,53 @@
 import { elements } from './base';
 
+export const getInput = () => elements.trendingSelect.value.toLowerCase().replace(' ', '_');
+
 export const clearResult = () => {
     elements.trendingList.innerHTML = '';
     elements.trendingPages.innerHTML = '';
 }
 
-const createButton = (page, type, isDisabled) => `
+const createButton = (page, type) => `
     <button class="btn-inline" data-goto="${type === 'prev' ? page - 1 : page + 1}">
         <i class="material-icons">keyboard_arrow_${type === 'prev' ? 'left' : 'right'}</i>
     </button>
 `;
 
-const createButtonDisabled = (type, isDisabled) => `
-    <button class="btn-inline  ${isDisabled ? 'btn--disabled' : ''}" >
+const createButtonDisabled = (type) => `
+    <button class="btn-inline btn--disabled" >
         <i class="material-icons">keyboard_arrow_${type === 'prev' ? 'left' : 'right'}</i>
     </button>
 `;
 
 const renderButton = (page, numResults, resPerPage) => {
+    //1) Get total page number
     const pages = Math.ceil(numResults / resPerPage);
 
+    //2) Get button html
     let button;
     if (page === 1 && pages > 1) {
         button = `
-            ${createButtonDisabled('prev', true)}
-            ${createButton(page, 'next', false)}
+            ${createButtonDisabled('prev')}
+            ${createButton(page, 'next')}
         `;
-    }else if (page < pages) {
+    } else if (page < pages) {
         button = `
-            ${createButton(page, 'prev', false)}
-            ${createButton(page, 'prev', false)}
+            ${createButton(page, 'prev')}
+            ${createButton(page, 'prev')}
         `;
-    }else if (page === pages && pages > 1) {
+    } else if (page === pages && pages > 1) {
         button = `
-            ${createButton(page, 'prev', false)}
+            ${createButton(page, 'prev')}
             ${createButtonDisabled('next', true)}
         `;
     }
 
+    //3) Insert button html to the UI
     elements.trendingPages.insertAdjacentHTML('afterbegin', button);
 }
 
 const renderMovie = movie => {
+    //1) Movie HTML
     const markup = `
         <li class="wow fadeIn">
             <a class="trending__link" href="#${movie.id}">
@@ -56,33 +62,18 @@ const renderMovie = movie => {
         </li>
     `;
 
+    //2) Insert markup to the UI
     elements.trendingList.insertAdjacentHTML('beforeend', markup);
 }
 
 export const renderResult = (movies, page = 1, resPerPage = 10) => {
-    //Render Result Of Page
+    //1) Count movies per page 
     const start = (page - 1) * resPerPage;
     const end = page * resPerPage;
 
+    //2) Render movies
     movies.slice(start, end).forEach(renderMovie);
 
-    //Render Pagination Buttons
+    //3) Render pagination buttons
     renderButton(page, movies.length, resPerPage);
 }
-
-
-// popularity: 608.26
-// vote_count: 614
-// video: false
-// poster_path: "/db32LaOibwEliAmSL2jjDF6oDdj.jpg"
-// id: 181812
-// adult: false
-// backdrop_path: "/dCB7d4l0mfpsISZvr6aPE2z5QF6.jpg"
-// original_language: "en"
-// original_title: "Star Wars: The Rise of Skywalker"
-// genre_ids: (3) [28, 12, 878]
-// title: "Star Wars: The Rise of Skywalker"
-// vote_average: 6.8
-// overview: "The surviving Resistance faces the First Order once again as the journey of Rey, Finn and Poe Dameron continues. With the power and knowledge of generations behind them, the final battle begins."
-// release_date: "2019-12-18"
-// genre: {id: 28, name: "Action"}

@@ -4,37 +4,14 @@ export const clearMovie = () => {
     elements.movie.innerHTML = '';
 }
 
-export const toggleOverlay = type => {
-    if(type === 'add') {
+export const toggleOverlay = isToggled => {
+    if (isToggled) {
         elements.movie.classList.add('overlay');
         document.body.style.overflowY = 'hidden';
-    } else if (type === 'remove') {
+    } else {
         elements.movie.classList.remove('overlay');
         document.body.style.overflowY = 'scroll';
     }
-}
-
-const ratingStars = rating => {
-    const ratingArr = [];
-    console.log(rating);
-    let [int, dec] = rating.toString().split('.').map(el => parseFloat(el, 10));
-    
-    for(let i = 0; i < 5; i++) {
-        if (int > 0) {
-            ratingArr.push('<i class="material-icons">star</i>');
-            int--;
-            console.log(int);
-        }else if (dec >= 5 && dec <= 8) {
-            ratingArr.push('<i class="material-icons">star_half</i>');
-            dec -= 5;
-            console.log(dec);
-        }else {
-            ratingArr.push('<i class="material-icons">star_border</i>');
-            console.log(i);
-        }
-    }
-
-    return ratingArr.join('');
 }
 
 const creatCast = cast => `
@@ -49,7 +26,32 @@ const creatCast = cast => `
     </li> <!-- Li End -->
 `;
 
+const ratingStars = rating => {
+    //1) Array for storing star html
+    const ratingArr = [];
+    
+    //2) Split integer and decimel
+    let [int, dec] = rating.toString().split('.').map(el => parseFloat(el, 10));
+    
+    //3) Calculate and push star html
+    for (let i = 0; i < 5; i++) {
+        if (int > 0) {
+            ratingArr.push('<i class="material-icons">star</i>');
+            int--;
+        } else if (dec >= 5 && dec <= 8) {
+            ratingArr.push('<i class="material-icons">star_half</i>');
+            dec = 0;
+        } else {
+            ratingArr.push('<i class="material-icons">star_border</i>');
+        }
+    }
+
+    //4) Return star html
+    return ratingArr.join('');
+}
+
 export const renderMovie = (movie, isFavourite) => {
+    //1) Movie html
     const markup = `
         <!-- Movie Info -->
         <button class="btn__close">
@@ -76,7 +78,7 @@ export const renderMovie = (movie, isFavourite) => {
                         <p class="movie__generes">${movie.genres.join(', ')}</p>
                     </div>
                     <div class="movie__rating">
-                        ${ratingStars(movie.rating.toFixed(1))}
+                        ${ratingStars(movie.rating)}
                     </div>
                     <div class="movie__desc">
                         <p>${movie.overview}</p>
@@ -92,5 +94,6 @@ export const renderMovie = (movie, isFavourite) => {
         </div> <!-- Movie Info -->
     `;
 
+    //2) Insert movie html to the UI
     elements.movie.insertAdjacentHTML('afterbegin', markup);
 }

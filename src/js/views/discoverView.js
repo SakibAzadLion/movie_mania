@@ -1,15 +1,19 @@
 import { elements } from "./base";
 
+export const getGenre = () => elements.genreSelect.value;
+
+export const getSortby = () => elements.sortbySelect.value;
+
 export const clearMovie = () => {
     elements.searchResList.innerHTML = '';
     elements.searchResPages.innerHTML = '';
 }
 
 export const nothingFound = () => {
-    const markup = `
-        <p>No Movies Found</p>
-    `;
-
+    //1) No movie HTML
+    const markup = `<p>No Movies Found</p>`;
+    
+    //2) Insert html to the UI
     elements.searchResList.insertAdjacentHTML('beforeend', markup);
 };
 
@@ -20,21 +24,26 @@ const createButton = (pageActive, page) => `
 `;
 
 const renderButton = (page, numRes, resPerPage) => {
+    //1) Insert button html to the UI
     const buttons = [];
     
+    //2) Get total page number
     const pages = Math.ceil(numRes / resPerPage);
     
+    //3) Get button html
     if (pages > 1) {
-        for(let i = 1; i <= pages; i++) {
+        for (let i = 1; i <= pages; i++) {
             let button = createButton(page, i);
-            buttons.push(button);
+            buttons.push(button); //Add button html to buttons
         }
     } 
 
+    //4) Insert button html to the UI
     elements.searchResPages.insertAdjacentHTML('afterbegin', buttons.join(''));
 }
 
 const renderMovie = movie => {
+    //1) Movie HTML
     const markup = `
         <li class="wow fadeIn">
             <a class="search__result__link" href="#${movie.id}">
@@ -54,36 +63,24 @@ const renderMovie = movie => {
         </li>
     `;
 
+    //2) Insert markup to the UI
     elements.searchResList.insertAdjacentHTML('beforeend', markup);
 }
 
 export const renderResult = (movie, page = 1, resPerPage = 12) => {
+    //1) Check if there is any movie or not
     if (movie.length > 0) {
-        //Render Result Of Page
+        //2) Count movies per page
         const start = (page - 1) * resPerPage;
         const end = page * resPerPage;
 
+        //3) Render movies
         movie.slice(start, end).forEach(renderMovie);
 
+        //4) Render pagination buttons
         renderButton(page, movie.length, resPerPage);
     } else {
+        //5) If there is no movie display nothing found
         nothingFound();
     }
 }
-
-
-// popularity: 536.593
-// vote_count: 1068
-// video: false
-// poster_path: "/db32LaOibwEliAmSL2jjDF6oDdj.jpg"
-// id: 181812
-// adult: false
-// backdrop_path: "/dCB7d4l0mfpsISZvr6aPE2z5QF6.jpg"
-// original_language: "en"
-// original_title: "Star Wars: The Rise of Skywalker"
-// genre_ids: (3) [28, 12, 878]
-// title: "Star Wars: The Rise of Skywalker"
-// vote_average: 6.7
-// overview: "The surviving Resistance faces the First Order once again as the journey of Rey, Finn and Poe Dameron continues. With the power and knowledge of generations behind them, the final battle begins."
-// release_date: "2019-12-18"
-// genre: {id: 28, name: "Action"}
