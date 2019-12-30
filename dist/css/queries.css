@@ -139,18 +139,9 @@
 /* Small phones: from 0 to 480px */
 @media only screen and (max-width: 480px) {
 
-    .movie-header {
-        display: flex;
-        align-items: center;
-        padding: 21px 35px 20px 35px;
-        height: 57px;
-    }
+    .movie-header { height: 57px; }
 
     .movie-filters { padding: 1px; }
-
-    .search .search__field {
-        height: 29px;
-    }
 
     .btn__search {
         width: 30px;
@@ -218,27 +209,34 @@
         padding: 45px 11px;
     }
 
+    .movie__content { flex-direction: column; }
+
     .movie__poster {
         flex: 0 0 12rem;
-        height: 20rem;
+        height: 22rem;
+        margin: 0 auto;
     }
 
     .movie__poster .movie__fig {
-        width: 172px;
+        width: 197px;
         height: 300px;
+        margin-right: 0;
     }
 
-    .movie__cast { margin-top: 60px; }
+    .movie__trailer { margin-right: 0; }
 
+    .movie__data { margin-top: 30px; }
+
+    .movie__cast { margin-top: 25px; }
+    
+    .movie__cast__list { margin-top: 8px; }
+    
+    .movie__cast__list li { width: 45%; }
+    
     .movie .btn__close {
         top: 5px;
         left: 5px;
         position: absolute;
-    }
-
-    .movie__fig {
-        width: 150px;
-        height: 300px;
     }
 
     .movie__data .movie__name { font-size: 100%; }
@@ -249,12 +247,10 @@
     .movie__trailer .btn__trailer { font-size: 65%; }
     .movie__cast h3 { font-size: 90%; }
 
-    .movie__cast { margin-top: 80px; }
-
     .cast__fig {
         width: 25px;
         height: 25px;
-        margin-right: 2px;
+        margin-right: 4px;
     }
 
     .cast__data .cast__name { font-size: 60%; }
