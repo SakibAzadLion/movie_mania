@@ -318,7 +318,7 @@ window.addEventListener('load', e => {
     state.favourite.readStorage();
     
     //3) Toggle Menu
-    favouriteView.toggleVisibility(state.favourite.numFavourite());
+    // favouriteView.toggleVisibility(state.favourite.numFavourite());
 
     //4) Redering favourite movie
     state.favourite.items.forEach(favourite => favouriteView.renderFavourite(favourite));
