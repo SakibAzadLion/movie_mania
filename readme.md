@@ -1,6 +1,6 @@
 # Movie Mania
 
-A movie info website builds with pure Js. Here you can get trending movies, discover new movies, search, and also you can add movies to your favorite list.
+A movie info website builds with pure Js. Some of the feature are trending movies, discover new movies, search and also you can add movies to your favorite list.
 
 **Live site:** [https://moviemania-sakib.netlify.app](https://moviemania-sakib.netlify.app)
 
