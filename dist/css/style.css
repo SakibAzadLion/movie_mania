@@ -336,6 +336,10 @@ select::-ms-expand {
     margin-right: 10px;
 }
 
+.search .search__field::placeholder {
+    color:#006669
+}
+
 .btn__search {
     width: 53px;
     height: 53px;

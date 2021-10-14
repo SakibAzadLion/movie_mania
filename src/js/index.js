@@ -2,7 +2,7 @@ import Trending from './models/Trending';
 import Movie from './models/Movie';
 import Discover from './models/Discover';
 import Search from './models/Search';
-import Favourite from './models/favourite';
+import Favourite from './models/Favourite';
 import { elements, renderLoader, clearLoader } from './views/base';
 import * as trendingView from './views/trendingView';
 import * as movieView from './views/movieView';
@@ -86,7 +86,7 @@ const controlMovie = async () => {
     if (id) {
         //2) New trending object and add to the state
         state.movie = new Movie(id);
-
+        
         //3) Prepare UI for module
         movieView.toggleOverlay(true);
         renderLoader(elements.movie);
@@ -174,6 +174,7 @@ window.addEventListener('load', controlDiscover);
 elements.genreSelect.addEventListener('change', controlDiscover);
 elements.sortbySelect.addEventListener('change', controlDiscover);
 elements.logoBox.addEventListener('click', controlDiscover); //On logo click call discover controler
+elements.logoBoxPhone.addEventListener('click', controlDiscover); //On logo Mobile click call discover controler
 
 //Discover controler btn event listeners
 elements.searchResPages.addEventListener('click', e => {
@@ -318,11 +319,11 @@ window.addEventListener('load', e => {
     state.favourite.readStorage();
     
     //3) Toggle Menu
-    // favouriteView.toggleVisibility(state.favourite.numFavourite());
+    favouriteView.toggleVisibility(state.favourite.numFavourite());
 
     //4) Redering favourite movie
     state.favourite.items.forEach(favourite => favouriteView.renderFavourite(favourite));
-})
+});
 
 
 

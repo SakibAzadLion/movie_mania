@@ -11,6 +11,7 @@ export const elements = {
     searchField: document.querySelector('.search__field'),
     favouriteList: document.querySelector('.favourite__menu__list'),
     logoBox: document.querySelector('.logo__box'),
+    logoBoxPhone: document.querySelector('.logo-box-phone'),
 }
 
 const elementsString = {

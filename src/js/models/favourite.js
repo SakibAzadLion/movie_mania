@@ -1,6 +1,6 @@
 export default class Favourite {
     constructor () {
-        this.items = [];
+        this.items = new Array();
     }
 
     addFavourite (id, title, genre, poster_img) {
@@ -46,8 +46,8 @@ export default class Favourite {
     readStorage () {
         //1) Read data from local storage
         const storage = JSON.parse(localStorage.getItem('favourite'));
-
+        
         //2) Add storage data to items array
-        this.items = storage;
+        if (storage) this.items = storage;        
     }
 }
