@@ -9,7 +9,7 @@ A movie info website builds with pure Js. Some of the features are trending movi
 - [The Movie API -](https://github.com/axios/axios) Movie Api for the movie info.
 - [Axios -](https://github.com/axios/axios) Used to make API requests.
 - [Webpack -](https://webpack.js.org/) Used to bundle JS.
-- [Babel -](https://github.com/axios/axios) Used to compile JS.
+- [Babel -](https://babeljs.io/) Used to compile JS.
 
 ## Usage
 For local development.
